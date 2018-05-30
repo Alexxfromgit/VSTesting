@@ -82,6 +82,28 @@ namespace Lecture9_Practice
                 Console.WriteLine("{0} was created in {1} year", k, v);
             }
 
+            //Ассоциативный массив. без вмешательства человека каждую записаь вставляет упорядоченную по ключу значению.
+            SortedList colors = new SortedList();
+            colors.Add('w', "white");
+            colors.Add('r', "red");
+            colors.Add('g', "green");
+            colors.Add('b', "black");
+            //Ключи должны быть сравниваемы. Должны сортироваться
+
+            foreach (DictionaryEntry de in colors)            
+                Console.WriteLine("Key: {0} and Value: {1}", de.Key, de.Value);
+
+            //Типизированый SortedList
+            SortedList<Car, string> s1 = new SortedList<Car, string>();
+            s1.Add(new Car("Ford", 2000), "USA");
+            s1.Add(new Car("Mercedes", 2005), "Germany");
+
+            //Автоматически поддерживает сортировку
+            SortedDictionary<string, Department> deptSD = new SortedDictionary<string, Department>();
+            deptSD.Add("MKT", new Department("MKT", "Marketing"));
+            deptSD.Add("SAL", new Department("SAL", "Sales"));
+
+
 
 
             Console.ReadKey();
