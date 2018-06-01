@@ -147,6 +147,43 @@ namespace Lecture10_Practice
         }
     }
 
+    public class Mammal { }
+    public class Dog : Mammal
+    {
+        public override string ToString()
+        {
+            return "Im a dog";
+        }
+    }
+    public class Cat : Mammal
+    {
+        public override string ToString()
+        {
+            return "Im a cat";
+        }
+    }
+    public class Elephant : Mammal { }
+    public class Fish { }
+    public class Reptilis { }
+
+    public class Patients : CollectionBase
+    {
+        public void AdmitPatient(object patient)
+        {
+            if ((patient) is Elephant)
+            {
+                Console.WriteLine("This is no one will write" + "No no no");
+            }
+            else
+            {
+                if ((patient) is Mammal | (patient) is Fish | (patient) is Reptilis)
+                {
+                    this.List.Add(patient);
+                }
+            }
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -233,6 +270,20 @@ namespace Lecture10_Practice
             {
                 Console.WriteLine(e.Message);
             }
+
+            Cat fluffy = new Cat();
+            Elephant slon = new Elephant();
+            Dog goldy = new Dog();
+            Patients SickPets = new Patients();
+            SickPets.AdmitPatient(fluffy);
+            SickPets.AdmitPatient(slon);
+            SickPets.AdmitPatient(goldy);
+            foreach (object pet in SickPets)
+            {
+                Console.WriteLine(pet);
+            }
+
+
 
 
             Console.ReadKey();
