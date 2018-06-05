@@ -39,13 +39,11 @@ namespace Lecture9_Hometask
         {
             this.x = x;
         }
-
     }
 
     class ExistException : Exception
     {
-
-        
+        public override string Message => "Element already exist in dictionary";
     }
 
     class DictionaryStudents
@@ -56,36 +54,51 @@ namespace Lecture9_Hometask
         {
             try
             {
-                if ((mark < 0) | (mark > 100))
-                {
-                    throw new RangeException(mark);
-                }
+                if ((mark <= 0) | (mark > 100))                
+                    throw new RangeException(mark);                
                 else
                 {
-                    dict.Add(st, mark);
+                    try
+                    {
+                        if (dict.ContainsKey(st) != true)                        
+                            dict.Add(st, mark);                        
+                        else                        
+                            throw new ExistException();                        
+                    }
+                    catch (ExistException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }                    
                 }                
             }
-            catch (Exception e)
+            catch (RangeException e)
             {
                 Console.WriteLine(e.Message);
-            }
-
-            
+            }            
         }
 
         public void AddStudents(int n)
         {
-
-            for (int i = 0; i < n; i++)
+            try
             {
-                Console.WriteLine("Enter student's name: ");
-                string stname = Console.ReadLine();
-                Console.WriteLine("Enter student's lastname: ");
-                string stlastname = Console.ReadLine();
-                Console.WriteLine("Enter student's mark: ");
-                int stmark = Int32.Parse(Console.ReadLine());
+                if ((n <= 0) | (n >= int.MaxValue))                
+                    throw new RangeException(n);                
 
-                AddStudent(new Student(stname, stlastname), stmark);
+                for (int i = 0; i < n; i++)
+                {
+                    Console.WriteLine("Enter student's name: ");
+                    string stname = Console.ReadLine();
+                    Console.WriteLine("Enter student's lastname: ");
+                    string stlastname = Console.ReadLine();
+                    Console.WriteLine("Enter student's mark: ");
+                    int stmark = Int32.Parse(Console.ReadLine());
+
+                    AddStudent(new Student(stname, stlastname), stmark);
+                }
+            }
+            catch (RangeException e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -93,7 +106,7 @@ namespace Lecture9_Hometask
         {
             foreach (KeyValuePair<Student, int> entry in dict)
             {
-                Console.WriteLine("{0} {1} has mark {2}", entry.Key.Name, entry.Key.Lastname, entry.Value);
+                Console.WriteLine("\n{0} {1} has mark {2}", entry.Key.Name, entry.Key.Lastname, entry.Value);
             }
         }
     }
@@ -106,9 +119,7 @@ namespace Lecture9_Hometask
             ds.AddStudents(3);
             ds.ListStudents();
 
-
             Console.ReadKey();
-
         }
     }
 }
