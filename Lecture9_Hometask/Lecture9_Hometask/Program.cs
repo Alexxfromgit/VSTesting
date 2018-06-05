@@ -33,7 +33,7 @@ namespace Lecture9_Hometask
     {
         public int x { get; }
 
-        public override string Message => "Оценка вышла за диапазон";
+        public override string Message => "Mark is out of range";
 
         public RangeException(int x)
         {
@@ -60,17 +60,22 @@ namespace Lecture9_Hometask
                 {
                     throw new RangeException(mark);
                 }
+                else
+                {
+                    dict.Add(st, mark);
+                }                
             }
             catch (Exception e)
             {
-                Console.WriteLine("Недопустимое значение", e.Message);
+                Console.WriteLine(e.Message);
             }
 
-            dict.Add(st, mark);
+            
         }
 
         public void AddStudents(int n)
         {
+
             for (int i = 0; i < n; i++)
             {
                 Console.WriteLine("Enter student's name: ");
