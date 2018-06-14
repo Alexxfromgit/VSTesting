@@ -73,7 +73,37 @@ namespace Lecture13_Practice
             Console.WriteLine("Список файлов диска D:");
             foreach (var item in fileName)            
                 Console.WriteLine(item);
+
+            //Делает тоже самое что предыдущие два блока
+            Console.WriteLine("Список файлов и дерикторий диска D:");
+            string[] ff = Directory.GetFileSystemEntries("d:\\");
+            foreach (string entry in ff)            
+                Console.WriteLine("{0}", entry);
+
+            //Directory - статический класс. Все методы этого класса статические. Не нужно создавать методы
+            //методы вызываем у самого класса
+            //DirectoryInfo - заставляет сначала создать объект а потом использовать. НЕ статический класс.
+
+            //Создание папки с заданным именем
+            string directoryName = "MyDirectory";
+            if (!Directory.Exists(@"D:" + directoryName))
+            {
+                DirectoryInfo d1 = new DirectoryInfo(@"D:\" + directoryName);
+                d1.Create();
+            }
+
+            if (File.Exists(@"D:\MyDirectory\MyFile.txt"))
+                File.Delete(@"D:\MyDirectory\MyFile.txt");
+
+            File.AppendAllText(@"D:\MyDirectory\MyFile.txt", "I like C#. ");
+            File.AppendAllText(@"D:\MyDirectory\MyFile.txt", "Let us like it together");
+            //Копирует существующий файл в новый файл
+            //Перезапись файла с тем же именем разрешена
+            File.Copy(@"D:\MyDirectory\MyFile.txt", @"D:\MyDirectory\CopeFile.txt", true);
+            string s = File.ReadAllText(@"D:\MyDirectory\CopeFile.txt");
+            Console.WriteLine(s);
             
+            //Есть так же FileInfo как и для DirectoryInfo
 
 
 
