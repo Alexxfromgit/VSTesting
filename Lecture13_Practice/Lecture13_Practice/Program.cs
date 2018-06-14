@@ -236,8 +236,8 @@ namespace Lecture13_Practice
             fs = new FileStream(@"D:\File2.dat", FileMode.Open);
             ArrayList newList = null;
             newList = (ArrayList)formatter2.Deserialize(fs);
-            foreach (object x in newList)            
-                Console.WriteLine(x);
+            foreach (object xxx in newList)            
+                Console.WriteLine(xxx);
 
             //-------------------------------------------------------------
             //Как можно повлиять на состояние объекта при сериализации и десериализации
