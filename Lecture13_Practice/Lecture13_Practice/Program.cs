@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary; //подключение бинарной сериализации
-using System.Runtime.Serialization;
+using System.Runtime.Serialization; //для обработки сериализации и десериализации событиями
 
 namespace Lecture13_Practice
 {
@@ -262,6 +262,9 @@ namespace Lecture13_Practice
                 Console.WriteLine("Объект десериализован");
                 Console.WriteLine("{0}  {1}", y.Name, y.Data);
             }
+
+            //----------------------------------------------------------------
+
 
 
             Console.ReadKey();
