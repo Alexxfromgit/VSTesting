@@ -102,8 +102,25 @@ namespace Lecture13_Practice
             File.Copy(@"D:\MyDirectory\MyFile.txt", @"D:\MyDirectory\CopeFile.txt", true);
             string s = File.ReadAllText(@"D:\MyDirectory\CopeFile.txt");
             Console.WriteLine(s);
-            
+
             //Есть так же FileInfo как и для DirectoryInfo
+
+            //----------------------------------------------------------
+            //BACK UP FILES
+            //----------------------------------------------------------
+            DirectoryInfo backupFoleder = new DirectoryInfo(@"D:\Democode\backup");
+            if (!backupFoleder.Exists)            
+                backupFoleder.Create();            
+            string currentFolderName = Directory.GetCurrentDirectory();
+            DirectoryInfo currentFolder2 = new DirectoryInfo(currentFolderName);
+            foreach (FileInfo file in currentFolder2.GetFiles())            
+                file.CopyTo(backupFoleder.FullName + @"\" + file.Name);            
+            //--------------------------------------------------------------
+            //BACK UP CREATED
+            //--------------------------------------------------------------
+
+
+
 
 
 
