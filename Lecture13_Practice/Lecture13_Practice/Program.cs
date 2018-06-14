@@ -31,7 +31,6 @@ namespace Lecture13_Practice
             string s = String.Format("Поле 1 = {0}, поле 2 = {1}, поле 3 = {2}", n, d, dt.ToShortDateString());
             return s;
         }
-
     }
 
     class Program
@@ -172,9 +171,17 @@ namespace Lecture13_Practice
             //4 варианта - двоичная бинарная джейсон сериализация
             //самая универсальная - бинарная. 
 
-
-
-
+            Demo ddd = new Demo(5, 6.5, new DateTime(2018, 01, 29));
+            Console.WriteLine("Оригинальный объект");
+            Console.WriteLine(ddd);
+            //создаем файл
+            FileStream fss = new FileStream(@"D:\file.dat", FileMode.Create);
+            //создаем объект класса BinaryFormatter
+            BinaryFormatter formatter = new BinaryFormatter();
+            //Сериализируем объект
+            formatter.Serialize(fss, ddd);
+            //закрываем файл
+            fss.Close();
 
 
             Console.ReadKey();
