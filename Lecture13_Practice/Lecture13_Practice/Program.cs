@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary; //подключение бинарной сериализации
+using System.Runtime.Serialization;
 
 namespace Lecture13_Practice
 {
@@ -31,6 +32,29 @@ namespace Lecture13_Practice
             string s = String.Format("Поле 1 = {0}, поле 2 = {1}, поле 3 = {2}", n, d, dt.ToShortDateString());
             return s;
         }
+    }
+
+    [Serializable]
+    class MoreData
+    {
+        private string name = "Alex";
+        private DateTime data = DateTime.Now;
+        [OnSerializing]//во время процесса
+        private void OnSerializing(StreamingContext context)
+        {
+            //Вызывается во время процесса сериализации
+            name = name.ToUpper();
+        }
+
+        [OnDeserialized]//по завершению процесса
+        private void OnDeserialization(StreamingContext context)
+        {
+            //Выполняется по завершению процесса десериализации
+            name = name.ToLower();
+            data = data.AddDays(2);
+        }
+        public string Name { get { return Name; } }
+        public string Data { get { return data.ToShortDateString(); } }
     }
 
     class Program
@@ -215,8 +239,29 @@ namespace Lecture13_Practice
             foreach (object x in newList)            
                 Console.WriteLine(x);
 
+            //-------------------------------------------------------------
+            //Как можно повлиять на состояние объекта при сериализации и десериализации
+            //-------------------------------------------------------------
 
-            
+            //объект для сериализации
+            MoreData x = new MoreData();
+            Console.WriteLine("{0}  {1}", x.Name, x.Data);
+            //создаем объект BinaryFormatter
+            BinaryFormatter formatter3 = new BinaryFormatter();
+            //получаем поток, куда будем записывать сериализованный объект
+            using (FileStream ffss = new FileStream("fille.dat", FileMode.OpenOrCreate))
+            {
+                formatter3.Serialize(ffss, x);
+                Console.WriteLine("Объект сериализован");
+            }
+
+            //Десериализация из файла fille.dat
+            using (FileStream ffss = new FileStream("fille.dat", FileMode.OpenOrCreate))
+            {
+                MoreData y = (MoreData)formatter3.Deserialize(ffss);
+                Console.WriteLine("Объект десериализован");
+                Console.WriteLine("{0}  {1}", y.Name, y.Data);
+            }
 
 
             Console.ReadKey();
