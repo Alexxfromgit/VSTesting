@@ -196,6 +196,28 @@ namespace Lecture13_Practice
             Console.WriteLine("Восстановленный объект");
             Console.WriteLine(ddd2);
 
+            //Сериализация многих объектов с помощью коллекции
+            //используем нетипизированную коллекцию
+            ArrayList myList = new ArrayList();
+            myList.Add("List of objects");
+            myList.Add(new Demo(2, 4.5, new DateTime(2018, 06, 12)));
+            myList.Add(new Demo(5, 6.7, new DateTime(2018, 06, 14)));
+            myList.Add(new DateTime(2018, 12, 25));
+
+            FileStream fs = new FileStream(@"D:\File2.dat", FileMode.Create);
+            BinaryFormatter formatter2 = new BinaryFormatter();
+            formatter2.Serialize(fs, myList);
+            fs.Close();
+
+            fs = new FileStream(@"D:\File2.dat", FileMode.Open);
+            ArrayList newList = null;
+            newList = (ArrayList)formatter2.Deserialize(fs);
+            foreach (object x in newList)            
+                Console.WriteLine(x);
+
+
+            
+
 
             Console.ReadKey();
 
