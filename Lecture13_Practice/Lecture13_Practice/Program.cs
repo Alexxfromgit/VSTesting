@@ -108,17 +108,42 @@ namespace Lecture13_Practice
             //----------------------------------------------------------
             //BACK UP FILES
             //----------------------------------------------------------
+            /*
             DirectoryInfo backupFoleder = new DirectoryInfo(@"D:\Democode\backup");
             if (!backupFoleder.Exists)            
                 backupFoleder.Create();            
             string currentFolderName = Directory.GetCurrentDirectory();
             DirectoryInfo currentFolder2 = new DirectoryInfo(currentFolderName);
             foreach (FileInfo file in currentFolder2.GetFiles())            
-                file.CopyTo(backupFoleder.FullName + @"\" + file.Name);            
+                file.CopyTo(backupFoleder.FullName + @"\" + file.Name);//Ошибка при повторном запуска файл уже существует
+            */
+
             //--------------------------------------------------------------
             //BACK UP CREATED
             //--------------------------------------------------------------
 
+            //--------------------------------------------------------------
+            //Информация о сменном носителе
+            //--------------------------------------------------------------
+            DriveInfo[] driveOnComputer = DriveInfo.GetDrives();
+            foreach (DriveInfo drive in driveOnComputer)
+            {
+                Console.WriteLine("Drive {0}", drive.Name); //Устройство не готово ошибка(обращается к диску Е!!!
+                Console.WriteLine("Files type: {0}", drive.VolumeLabel);
+                if (drive.IsReady)
+                {
+                    Console.WriteLine(" Volume Label: {0}", drive.VolumeLabel);
+                    Console.WriteLine(" File System: {0}", drive.DriveFormat);
+                    Console.WriteLine(" Total size of drive: {0}", drive.TotalSize);
+                    Console.WriteLine(" Total available space: {0}", drive.TotalFreeSpace);
+                }
+                else
+                {
+                    Console.WriteLine(" No media available");
+                }
+                Console.WriteLine();
+            }
+            //---------------------------------------------------------------
 
 
 
