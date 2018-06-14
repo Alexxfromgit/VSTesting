@@ -146,6 +146,7 @@ namespace Lecture13_Practice
             //--------------------------------------------------------------
             //Информация о сменном носителе
             //--------------------------------------------------------------
+            /*
             DriveInfo[] driveOnComputer = DriveInfo.GetDrives();
             foreach (DriveInfo drive in driveOnComputer)
             {
@@ -164,6 +165,7 @@ namespace Lecture13_Practice
                 }
                 Console.WriteLine();
             }
+            */
             //---------------------------------------------------------------
 
             //Сохранить текущее состояние объекта
@@ -171,6 +173,7 @@ namespace Lecture13_Practice
             //4 варианта - двоичная бинарная джейсон сериализация
             //самая универсальная - бинарная. 
 
+            //СЕРИАЛИЗАЦИЯ
             Demo ddd = new Demo(5, 6.5, new DateTime(2018, 01, 29));
             Console.WriteLine("Оригинальный объект");
             Console.WriteLine(ddd);
@@ -182,6 +185,16 @@ namespace Lecture13_Practice
             formatter.Serialize(fss, ddd);
             //закрываем файл
             fss.Close();
+
+            //ДЕСЕРИАЛИЗАЦИЯ
+            //Открываем файл для чтения
+            fss = new FileStream(@"D:\file.dat", FileMode.Open);
+            //Создаем новый объект класса Demo
+            Demo ddd2 = null;
+            //Восстанавливаем объект (Десериализируем)
+            ddd2 = (Demo)formatter.Deserialize(fss);
+            Console.WriteLine("Восстановленный объект");
+            Console.WriteLine(ddd2);
 
 
             Console.ReadKey();
