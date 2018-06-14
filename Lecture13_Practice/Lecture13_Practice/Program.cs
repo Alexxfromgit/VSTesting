@@ -53,7 +53,7 @@ namespace Lecture13_Practice
             name = name.ToLower();
             data = data.AddDays(2);
         }
-        public string Name { get { return Name; } }
+        public string Name { get { return name; } }
         public string Data { get { return data.ToShortDateString(); } }
     }
 
