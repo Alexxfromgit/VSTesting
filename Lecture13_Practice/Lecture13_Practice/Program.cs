@@ -5,12 +5,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary; //подключение бинарной сериализации
 
 namespace Lecture13_Practice
 {
     //Файлы и работа с файлами
     //\n - переход на новую строку
     //\t - табуляция, отступ несколько пробелов
+
+    //сериализация
+    [Serializable]
+    class Demo
+    {
+        int n;
+        double d;
+        DateTime dt;
+        public Demo(int n, double d, DateTime dt)
+        {
+            this.n = n;
+            this.d = d;
+            this.dt = dt;
+        }
+        public override string ToString()
+        {
+            string s = String.Format("Поле 1 = {0}, поле 2 = {1}, поле 3 = {2}", n, d, dt.ToShortDateString());
+            return s;
+        }
+
+    }
 
     class Program
     {
@@ -145,6 +167,10 @@ namespace Lecture13_Practice
             }
             //---------------------------------------------------------------
 
+            //Сохранить текущее состояние объекта
+            //Сериализация - процесс сохранения объекта в файл на диске
+            //4 варианта - двоичная бинарная джейсон сериализация
+            //самая универсальная - бинарная. 
 
 
 
