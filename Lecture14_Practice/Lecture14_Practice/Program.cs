@@ -22,6 +22,18 @@ namespace Lecture14_Practice
         //объявляем делегат получающий две целочисленные переменные
         public delegate int MathDelegate(int x, int y);
 
+        //-----------------
+        static void FindByName(List<string> members, string Name, Func<string, string, bool> predicate)
+        {
+            foreach (var member in members)
+            {
+                if (predicate(member, Name))
+                {
+                    Console.WriteLine(member);
+                }
+            }
+        }
+
 
         static void Main(string[] args)
         {
@@ -98,7 +110,22 @@ namespace Lecture14_Practice
             Console.WriteLine(max3(2, 8, 5));
             //----------------------------------------------------------------------------
 
-
+            //------------------------------------------------------------
+            var teamMembers = new List<string>
+            {
+                "Lou Loomis",
+                "Smoke Porterhouse",
+                "Danny Smith",
+                "Ty Webb",
+                "Crocodail Danny",
+                "Dannyil Jobs"
+            };
+            Console.WriteLine("\nВсе строки, содержащие Danny");
+            FindByName(teamMembers, "Danny", (x, y) => x.Contains(y));
+            Console.WriteLine("\nВсе строки, длиннее Danny");
+            FindByName(teamMembers, "Danny", (x, y) => x.Length > y.Length);
+            Console.WriteLine("\nВсе строки, начинающиеся так же как и Danny");
+            FindByName(teamMembers, "Danny", (x, y) => x[0] == y[0]);
 
 
 
