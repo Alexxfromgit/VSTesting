@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 //LINQ. Lambda Expressions
 namespace Lecture14_Practice
 {
@@ -12,6 +13,23 @@ namespace Lecture14_Practice
     //Лямбда выражение имеет след синтаксис: слева от лямбда оператора определяется список параметров,
     //а справа блок выражений, использующий эти параметры
     //(список_параметров => выражение.
+
+    static class MyExtensions
+    {
+        public static IEnumerable FindItems(this IEnumerable x, Predicate<int> f)
+        {
+            ArrayList q = new ArrayList();
+            foreach (int  y in x)
+            {
+                if (f(y))
+                {
+                    q.Add(y);
+                }
+            }
+            return (IEnumerable)q;
+        }
+    }
+
 
 
     
@@ -127,8 +145,26 @@ namespace Lecture14_Practice
             Console.WriteLine("\nВсе строки, начинающиеся так же как и Danny");
             FindByName(teamMembers, "Danny", (x, y) => x[0] == y[0]);
 
+            //Расширяющий метод для колл и массив который будет получать в качестве параметра предикат 
+            //Прообраз LINQ..
+            int[] lst = { 3, -6, 2, -7, 8, 5, 4 };
 
+            Console.WriteLine();
+            var data1 = lst.FindItems(x => x % 2 == 0);
+            foreach (var t in data1)
+                Console.WriteLine(t);
 
+            Console.WriteLine();
+            var data2 = lst.FindItems(x => x % 2 != 0);
+            foreach (var t in data2)
+                Console.WriteLine(t);
+
+            Console.WriteLine();
+            var data3 = lst.FindItems(x => x > 0);
+            foreach (var t in data3)
+                Console.WriteLine(t);
+
+            
 
 
             Console.ReadKey();
