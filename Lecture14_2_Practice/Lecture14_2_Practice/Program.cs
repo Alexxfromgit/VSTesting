@@ -161,7 +161,7 @@ namespace Lecture14_2_Practice
                 Console.WriteLine();
             }
 
-
+            //Metanit.com - статьи, Professorweb.ru, MSDN статьи про LINQ технологии
 
 
             Console.ReadKey();
