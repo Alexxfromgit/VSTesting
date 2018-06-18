@@ -17,6 +17,8 @@ namespace Lecture14_Practice
 
     class Program
     {
+        //объявляем делегат получающий две целочисленные переменные
+        public delegate int MathDelegate(int x, int y);
 
 
         static void Main(string[] args)
@@ -33,6 +35,26 @@ namespace Lecture14_Practice
             md1 = y => Math.Sqrt(y);
             Console.WriteLine(md1(25));
 
+            //s = 1/2 + 1/3 + ... 1/n
+            md1 = n =>
+            {
+                double s = 0;
+                for (int i = 2; i <= n; i++) s += 1.0 / 1;
+                return s;
+            };
+            Console.WriteLine(md1(10));
+
+            //Как получить сумму квадратов чисел
+            MathDelegate md;
+            //Использование анонимного метода. Представление анонимного метода через делегат
+            //Передаем делегату блок кода, который и является анонимным методом
+            md = delegate (int x, int y) { return (x * x) + (y * y); };
+            Console.WriteLine("5*5 + 3*3 = {0}", md(5, 3));
+
+            //Использование лямбда выражения вместо анонимного метода. Представления через лямбда выражение
+            md = (x, y) => (x * x) + (y * y);
+            Console.WriteLine("5*5 + 3*3 = {0}", md(5, 3));
+            //Лямбда выражение представляет собой упрощенную запись анонимных методов
 
 
 
