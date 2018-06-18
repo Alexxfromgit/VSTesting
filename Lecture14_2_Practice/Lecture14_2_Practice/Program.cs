@@ -11,6 +11,7 @@ namespace Lecture14_2_Practice
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public Decimal Salary { get; set; }
+        public string Nationality { get; set; }
     }
 
 
@@ -114,7 +115,51 @@ namespace Lecture14_2_Practice
 
             Console.WriteLine("\nКолличество имен с буквой е = {0}", nu);
             //-----------------------------------------------
+            var employees3 = new List<Employee>()
+            {
+                new Employee {FirstName = "Petr", LastName = "Petrov", Nationality = "Ukraine"},
+                new Employee {FirstName = "Semen", LastName = "Semenov", Nationality = "Russian"},
+                new Employee {FirstName = "Ivan", LastName = "Ivanov", Nationality = "Ukraine"},
+                new Employee {FirstName = "Andrey", LastName = "Semenov", Nationality = "American"}
+            };
 
+            var query5 = from emp in employees3
+                         orderby emp.Nationality,
+                                 emp.LastName descending,
+                                 emp.FirstName descending
+                         select emp;
+
+            foreach (var item in employees3)
+            {
+                Console.WriteLine("{0} {1} {2}", item.LastName, item.FirstName, item.Nationality);
+            }
+            //------------------------------------------------------
+            //Группировка
+
+            var employees4 = new List<Employee>()
+            {
+                new Employee {FirstName = "Petr", LastName = "Petrov", Nationality = "Ukraine"},
+                new Employee {FirstName = "Semen", LastName = "Semenov", Nationality = "Russian"},
+                new Employee {FirstName = "Ivan", LastName = "Ivanov", Nationality = "Ukraine"},
+                new Employee {FirstName = "Andrey", LastName = "Semenov", Nationality = "American"}
+            };
+
+            var query6 = from emp in employees4
+                         group emp by new
+                         {
+                             Nationality = emp.Nationality,
+                             LastName = emp.LastName
+                         };
+
+            foreach (var group in query6)
+            {
+                Console.WriteLine(group.Key);
+                foreach (var employee in group)
+                {
+                    Console.WriteLine(employee.FirstName);
+                }
+                Console.WriteLine();
+            }
 
 
 
