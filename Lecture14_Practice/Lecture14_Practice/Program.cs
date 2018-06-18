@@ -85,6 +85,18 @@ namespace Lecture14_Practice
             Console.WriteLine("Result 2 = {0}", f2(n));
             Console.WriteLine("Result 3 = {0}", f3(n));
 
+            Func<int, int, bool> f = (x, y) => x == y;
+            int a = 5, b = 6, c = 5;
+            if (f(a,c))            
+                Console.WriteLine("Числа равны");            
+            else            
+                Console.WriteLine("Числа не равны");
+
+            //----------------------------------------------------------------------------
+            //Реалтзация функции определяющая максимум из трех значений
+            Func<int, int, int, int> max3 = (k, l, m) => Math.Max(Math.Max(k, l), m);
+            Console.WriteLine(max3(2, 8, 5));
+            //----------------------------------------------------------------------------
 
 
 
