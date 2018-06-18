@@ -14,6 +14,8 @@ namespace Lecture14_Practice
     //(список_параметров => выражение.
 
 
+    
+
 
     class Program
     {
@@ -36,10 +38,10 @@ namespace Lecture14_Practice
             Console.WriteLine(md1(25));
 
             //s = 1/2 + 1/3 + ... 1/n
-            md1 = n =>
+            md1 = z =>
             {
                 double s = 0;
-                for (int i = 2; i <= n; i++) s += 1.0 / 1;
+                for (int i = 2; i <= z; i++) s += 1.0 / 1;
                 return s;
             };
             Console.WriteLine(md1(10));
@@ -55,6 +57,34 @@ namespace Lecture14_Practice
             md = (x, y) => (x * x) + (y * y);
             Console.WriteLine("5*5 + 3*3 = {0}", md(5, 3));
             //Лямбда выражение представляет собой упрощенную запись анонимных методов
+
+            //-------------------------------------------------------------------------
+            //Стандарный делегат Action<>
+            //Инкапсулирует метод, который принимает от 1 до 16 параметров
+            //и не возвращает значение
+            //используется для методов которые ничего не возвращают
+
+            Action<string> PrintString;
+            PrintString = s => Console.WriteLine(s);
+            PrintString("Hello World!");
+
+            Action<int, int> PrintSumm;
+            PrintSumm = (x, y) => Console.WriteLine(x + y);
+            PrintSumm(2, 3);
+
+            //---------------------------------------------------------------------------
+            //Func<T, TResult> - стандартный делегат
+            //Инкапсулирует метод с одним параметром и возвращает значение типа, указанного в параметре TResult.
+
+            Func<int, double> f1 = x => x / 2;
+            Func<double, double> f2 = x => x / 2;
+            Func<double, int> f3 = x => (int)x / 2;
+
+            int n = 9;
+            Console.WriteLine("Result 1 = {0}", f1(n));
+            Console.WriteLine("Result 2 = {0}", f2(n));
+            Console.WriteLine("Result 3 = {0}", f3(n));
+
 
 
 
