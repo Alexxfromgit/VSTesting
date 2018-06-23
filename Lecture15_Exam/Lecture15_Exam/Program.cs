@@ -74,7 +74,7 @@ namespace Lecture15_Exam
                         select lastname;
 
             foreach (var item in query)
-            {
+            {                
                 Console.WriteLine(item);
             }
         }
@@ -82,7 +82,7 @@ namespace Lecture15_Exam
 
     class Game
     {
-        Comand firstComand = new Comand("Manchester");
+        Comand firstComand = new Comand("Manchester"); //Команда должна существовать до игры!
         Comand secondComand = new Comand("Inter");
         Judge sud = new Judge("sudia");
 
@@ -159,15 +159,8 @@ namespace Lecture15_Exam
 
     class Program
     {
-
-
-
         static void Main(string[] args)
         {
-
-
-
-
             Game game = new Game();
             game.GameResult();
 
